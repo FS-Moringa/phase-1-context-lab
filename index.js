@@ -1,16 +1,16 @@
 /* Your Code Here */
 
 const createEmployeeRecord = (array) => {
-    return {
-      firstName: array[0],
-      familyName: array[1],
-      title: array[2],
-      payPerHour: array[3],
-      timeInEvents: [],
-      timeOutEvents: [],
-    }
-  
+  return {
+    firstName: array[0],
+    familyName: array[1],
+    title: array[2],
+    payPerHour: array[3],
+    timeInEvents: [],
+    timeOutEvents: [],
   }
+  
+}
   
   const createEmployeeRecords = (employeeRecords) => {
     return employeeRecords.map(arrayEmp => {
@@ -18,45 +18,39 @@ const createEmployeeRecord = (array) => {
     })
   }
   
-  const timeCalc = (dateTime) => {
-    return parseInt(dateTime.match(/\d{4}$/)[0])
-  } 
 
-  const dateCalc = (dateTime) => {
-    return dateTime.match(/\d{4}-\d{2}-\d{2}/)[0]
-  }
+  function createTimeInEvent(dateStamp){
+    const [date, hour] = dateStamp.split(" ")
 
-  const createTimeInEvent = (timeIn) => {
     this.timeInEvents.push({
       type: "TimeIn",
-      date: dateCalc(timeIn),
-      hour: timeCalc(timeIn)
+      hour: parseInt(hour, 10),
+      date,
   
     })
     return this
   }
   
 
-  const createTimeOutEvent = (timeOut) => {
+  function createTimeOutEvent(dateStamp){
+    const [date, hour] = dateStamp.split(" ")
+
     this.timeOutEvents.push({
       type: "TimeOut",
-      date: dateCalc(timeOut),
-      hour: timeCalc(timeOut)
+      hour: parseInt(hour, 10),
+      date,
       
     })
     return this
   }
   
 
-  const hoursWorkedOnDate = (dateCalc) => {
-    const timeIn = this.timeInEvents.find((event) => {
-       event.date == dateCalc
+  function hoursWorkedOnDate (dates) {
+    const timeIn = this.timeInEvents.find(event => 
+       event.date === dates)
   
-    })
-  
-    const timeOut = this.timeOutEvents.find((event) => {
-       event.date == dateCalc
-    })
+    const timeOut = this.timeOutEvents.find(event =>
+       event.date === dates)
   
     const timeWorked = (timeOut.hour - timeIn.hour) / 100
     return timeWorked
@@ -64,10 +58,10 @@ const createEmployeeRecord = (array) => {
   }
   
   
-  const wagesEarnedOnDate = (date) => {
-    const wagesEarned = hoursWorkedOnDate.call(this, dateCalc)
-    const realWage = wagesEarned * this.payPerHour
-    return realWage
+  function wagesEarnedOnDate (date) {
+    const timeWorked = hoursWorkedOnDate.call(this, date)
+    return timeWorked * this.payPerHour
+    // return realWage
   
   }
 
@@ -84,6 +78,8 @@ const createEmployeeRecord = (array) => {
     }, 0)
   
   }
+
+
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
