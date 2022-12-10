@@ -1,0 +1,9 @@
+## createEmployeeRecords
+`map()` iterates through the container array
+    ex employees[
+        ["moe", "sizlak", "barkeep", 2],
+        ["bartholomew", "simpson", "scamp", 3]
+        ["Mister", "Matt", "Chief Awesomeness Offiser", 1000]
+    ]
+
+- calling the createEmployeeRecord converts the nested arrays into objects
